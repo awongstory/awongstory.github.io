@@ -1,4 +1,3 @@
-@@ -1,37 +1,10 @@
 ## Welcome to GitHub Pages
 Hello World!
 

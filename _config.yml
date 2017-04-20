@@ -1,3 +1,4 @@
 theme: jekyll-theme-cayman
 title: From illegible to insights
 description: Scrubbing data for good stories
+gem 'wdm', '>=0.1.0' if Gem.win_platform?

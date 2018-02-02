@@ -30,7 +30,7 @@ Few notes:
 
 Hope you're still with me!
 
-First things first, import your libraries.
+First things first, import your libraries. You'll need pandas, numpy, and an independent t-test from the scipy.stats library.
 
 {% highlight python %}
 import pandas as pd
@@ -40,7 +40,7 @@ from scipy.stats import ttest_ind
 
 We're using the chained value to 2009 dollars, 2000 onward. Get your recession start, in string format:
 
-<block>
+{% highlight python %}
 def get_recession_start():
     gdp = pd.read_excel('gdplev.xls', skiprows = 7, usecols= {'Unnamed: 4', 'Unnamed: 6'})
     gdp = gdp.loc[212:]
@@ -52,11 +52,11 @@ def get_recession_start():
         if (gdp.iloc[i][1] > gdp.iloc[i+1][1]) & (gdp.iloc[i+1][1] > gdp.iloc[i+2][1]):
             quarters.append(gdp.iloc[i+1][0])
     return quarters[0]
-</block>
+{% endhighlight %}
 
 And get the recession end:
 
-<block>
+{% highlight python %}
 def get_recession_end():
     #figured out that gdp[gdp['Quarter'] == '2008q2'].index.tolist() was [245], but for some reason it won't compile right
     gdp2 = gdp.loc[245:]
@@ -65,22 +65,22 @@ def get_recession_end():
         if (gdp2.iloc[i+2][1] > gdp2.iloc[i+1][1])  & (gdp2.iloc[i+1][1] > gdp2.iloc[i][1]):
             recession_end.append(gdp2.iloc[i+2][0])
     return recession_end[0]
-</block>
+{% endhighlight %}
 
 From recession start to recession end, you need to find the bottom:
 
-<block>
+{% highlight python %}
 def get_recession_bottom():
     '''Returns the year and quarter of the recession bottom time as a 
     string value in a format such as 2005q3'''
     recession_period = gdp.loc[245:]
     recession_min = recession_period[recession_period['GDP'] == recession_period['GDP'].min()]
     return recession_min.values[0][0]
-</block>
+{% endhighlight %}
 
 Get a list of university towns:
 
-<block>
+{% highlight python %}
 def get_list_of_university_towns():
     '''Returns a DataFrame of towns and the states they are in from the 
     university_towns.txt list. The format of the DataFrame should be:
@@ -102,22 +102,14 @@ def get_list_of_university_towns():
             state_town.append([state,town])
     state_college_df = pd.DataFrame(state_town,columns = ['State','RegionName'])
     return state_college_df
-</block>
+{% endhighlight %}
 
-And then convert the raw housing data into quarters:
+And then convert the raw housing data into quarters.
 
-<block>
+We're looking for averages of the month of Jan-Mar/Apr-June/July-Sept/Oct-Dec, converted into a dataframe, with a multi-index in the shape of ["State", "RegionName"]. You should have 67 columns and 10, 730 rows. 
+
+{% highlight python %}
 def convert_housing_data_to_quarters():
-    '''Converts the housing data to quarters and returns it as mean 
-    values in a dataframe. This dataframe should be a dataframe with
-    columns for 2000q1 through 2016q3, and should have a multi-index
-    in the shape of ["State","RegionName"].
-    
-    Note: Quarters are defined in the assignment description, they are
-    not arbitrary three month periods.
-    
-    The resulting dataframe should have 67 columns, and 10,730 rows.
-    '''
     housingdata_df = pd.read_csv('City_Zhvi_AllHomes.csv')
     #convert two-letter-state to full name of state
     housingdata_df['State'] = housingdata_df['State'].map(states)
@@ -129,40 +121,40 @@ def convert_housing_data_to_quarters():
     housingdata_df = housingdata_df.groupby(pd.PeriodIndex(housingdata_df.columns, freq='Q'), axis=1).mean()
     global housingdata_df
     return housingdata_df
-	
-</block>
+{% endhighlight %}
 
-Call all the functions from earlier:
+Call all the functions from earlier, and drop the NaN values in the dataframe.
 
-<block>
+{% highlight python %}
 recession_start = get_recession_start()
 recession_bottom = get_recession_bottom()
 university_towns = get_list_of_university_towns()
-
-housingdata_df = convert_housing_data_to_quarters().dropna()</block>
+housingdata_df = convert_housing_data_to_quarters().dropna(){% endhighlight %}
 
 Make a copy of your housingdata_df, then create a ratio of housing prices:
 
-<block>
+{% highlight python %}
 hdf = housingdata_df.copy()
 ratio = pd.DataFrame({'ratio': hdf[recession_start].div(hdf[recession_bottom])})
-</block>
+{% endhighlight %}
 
-This was where I struggled. I could not join ratio as a column on hdf; it returned a DateParseError: Unknown datetime string format, unable to parse ratio.
+This was where I struggled. I could not join ratio as a column on hdf; it returned a 
+
+> DateParseError: Unknown datetime string format, unable to parse ratio.
 
 Remember when we converted the housingdata_df into quarters using PeriodIndex? Ratio was not recognized as a datetime. The solution I chose was to change hdf dataframe's columns into strings, then concatenate ratio to the multiple strings... and then convert it back to a dataframe. 
 
-<block>
+{% highlight python %}
 hdf.columns = hdf.columns.to_series().astype(str)
 hdf = pd.concat([hdf, ratio], axis=1)
 
 hdf = pd.DataFrame(hdf)
 hdf.reset_index(['State','RegionName'], inplace = True)
-</block>
+{% endhighlight %}
 
 Then splice the dataframe into university town and non-university towns, calculate ratio for each, and dropna:
 
-<block>
+{% highlight python %}
 unitown_priceratio = hdf.loc[list(university_towns.index)]['ratio'].dropna()
 
 # minus/exclude university towns from total dataframe to get non-university towns
@@ -170,15 +162,16 @@ nonunitown_priceratio_index = set(hdf.index) - set(unitown_priceratio)
 
 #and then calculate the ratio
 nonunitown_priceratio = hdf.loc[list(nonunitown_priceratio_index),:]['ratio'].dropna()
-</block>
+{% endhighlight %}
 
 The last bit is to run the t-test. Skip the next two paragraphs if you're familiar with t-tests.
 
-**So what exactly does t-test do?** A t-test tests the difference between the means of two independent (or different conditions) groups. For example, let's say we want to compare the mean income of two different groups of peaches, with fertilizer and without. We know there's going to be a difference in the average weight of the two groups, but is the difference in the average weight ENOUGH/sufficiently large to say that these peaches were drawn from different populations?
+**So what exactly does t-test do?** 
+A t-test tests the difference between the means of two independent (or different conditions) groups. For example, let's say we want to compare the mean income of two different groups of peaches, with fertilizer and without. We know there's going to be a difference in the average weight of the two groups, but is the difference in the average weight ENOUGH/sufficiently large to say that these peaches were drawn from different populations?
 
-A common p-value is p < 0.05; that is, the probability of obtaining this sample data is less than 0.05 IF there is no difference between means between the two groups.  
+A common p-value is p < 0.05; that is, the probability of obtaining this sample data is less than 0.05 <b>IF</b> there is no difference between means between the two groups.  
 
-<block>
+{% highlight python %}
 def run_ttest(a, b):
   #run t-test comparing university town values to non-university town values
     tstat, p = tuple(ttest_ind(a, b))
@@ -191,7 +184,7 @@ def run_ttest(a, b):
     return (different, p, better[result])
 
 run_ttest(unitown_priceratio, nonunitown_priceratio)
-</block>
+{% endhighlight %}
 
 This returns True, the p-value, and university town. 
 

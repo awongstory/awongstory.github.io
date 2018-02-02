@@ -32,10 +32,11 @@ Hope you're still with me!
 
 First things first, import your libraries.
 
-<block>
+{% highlight python %}
 import pandas as pd
 import numpy as np
-from scipy.stats import ttest_ind</block>
+from scipy.stats import ttest_ind
+{% endhighlight %}
 
 We're using the chained value to 2009 dollars, 2000 onward. Get your recession start, in string format:
 

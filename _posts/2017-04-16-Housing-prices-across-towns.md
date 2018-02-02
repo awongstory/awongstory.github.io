@@ -156,10 +156,8 @@ Then splice the dataframe into university town and non-university towns, calcula
 
 {% highlight python %}
 unitown_priceratio = hdf.loc[list(university_towns.index)]['ratio'].dropna()
-
-# minus/exclude university towns from total dataframe to get non-university towns
+#minus/exclude university towns from total dataframe to get non-university towns
 nonunitown_priceratio_index = set(hdf.index) - set(unitown_priceratio)
-
 #and then calculate the ratio
 nonunitown_priceratio = hdf.loc[list(nonunitown_priceratio_index),:]['ratio'].dropna()
 {% endhighlight %}
@@ -175,12 +173,10 @@ A common p-value is p < 0.05; that is, the probability of obtaining this sample 
 def run_ttest(a, b):
   #run t-test comparing university town values to non-university town values
     tstat, p = tuple(ttest_ind(a, b))
-    
-    #return tuple where different = True or False, return p-value, and whether university-town is better or not
+    # return tuple where different = True or False, return p-value, and whether university-town is better or not
     different = p < 0.05
     result = tstat < 0
     better = ["university town", "non-university town"]
-    
     return (different, p, better[result])
 
 run_ttest(unitown_priceratio, nonunitown_priceratio)

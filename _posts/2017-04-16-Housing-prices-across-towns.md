@@ -141,7 +141,7 @@ ratio = pd.DataFrame({'ratio': hdf[recession_start].div(hdf[recession_bottom])})
 
 This was where I struggled. I could not join ratio as a column on hdf; it returned a 
 
-> DateParseError: Unknown datetime string format, unable to parse ratio.
+>> DateParseError: Unknown datetime string format, unable to parse ratio.
 
 Remember when we converted the housingdata_df into quarters using PeriodIndex? Ratio was not recognized as a datetime. The solution I chose was to change hdf dataframe's columns into strings, then concatenate ratio to the multiple strings... and then convert it back to a dataframe. 
 

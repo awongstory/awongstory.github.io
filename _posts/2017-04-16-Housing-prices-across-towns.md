@@ -129,7 +129,8 @@ Call all the functions from earlier, and drop the NaN values in the dataframe.
 recession_start = get_recession_start()
 recession_bottom = get_recession_bottom()
 university_towns = get_list_of_university_towns()
-housingdata_df = convert_housing_data_to_quarters().dropna(){% endhighlight %}
+housingdata_df = convert_housing_data_to_quarters().dropna()
+{% endhighlight %}
 
 Make a copy of your housingdata_df, then create a ratio of housing prices:
 

@@ -166,7 +166,9 @@ nonunitown_priceratio = hdf.loc[list(nonunitown_priceratio_index),:]['ratio'].dr
 The last bit is to run the t-test. Skip the next two paragraphs if you're familiar with t-tests.
 
 **So what exactly does t-test do?** 
-A t-test tests the difference between the means of two independent (or different conditions) groups. For example, let's say we want to compare the mean weight of two different groups of peaches, with fertilizer and without. We know there's going to be a difference in the average weight of the two groups, but is the difference in the average weight ENOUGH/sufficiently large to say that these peaches were drawn from different populations?
+A t-test tests the difference between the means of two independent (or different conditions) groups. 
+
+For example, let's say we want to compare the mean weight of two different groups of peaches, with fertilizer and without. We know there's going to be a difference in the average weight of the two groups, but is the difference in the average weight ENOUGH/sufficiently large to say that these peaches were drawn from different populations?
 
 A common p-value is p < 0.05; that is, the probability of obtaining this sample data is less than 0.05 <b>IF</b> there is no difference between means between the two groups.  
 
@@ -186,3 +188,5 @@ run_ttest(unitown_priceratio, nonunitown_priceratio)
 This returns True, the p-value, and university town. 
 
 Based on the t-test, we can conclude that the alt-hypothesis is not rejected; ie., housing prices in university towns are less impacted by recession compared to housing prices in non-university towns.
+
+I hope you found this post useful!

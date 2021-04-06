@@ -11,6 +11,6 @@ I started my career in behavioral health, largely in risk assessment and connect
 
 I aspire to gear my insights into dollarized amounts as far as I can take it. 
 
-### Reach out to me if you've any comments or questions!
+Reach out to me if you've any comments or questions:
 
 [awongstory@gmail.com](mailto:awongstory@gmail.com)

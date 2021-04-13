@@ -24,29 +24,29 @@ Prepare, listen, dollarize, get a commitment to action or a close.
 6. Ask to do it again. 
 
 **Prioritize:**
-Target big fish
-Don’t cold call
-Maximize your call-to-close ratio.
+1. Target big fish
+2. Don’t cold call
+3. Maximize your call-to-close ratio.
 
 Prioritizing is an easy concept to understand. You only have a finite amount of calls you can make, so the goal is to hit big and hit the ones you are more confident you can close. This increases your chances of meeting your quota and does not waste your (and your clients' time).
 
 **Pre-call planning:**
-Written sales call objective
-Needs analysis questions
-Something to show
-Anticipated customer concerns and objections
-Points of difference compared to competitors
-Meaningful benefits to customers
-Dollarization approach; investment return analysis - the cost of going without your solution per annum/month/day - the true cost (versus price) of the product. 
-Strategies to handle objections and eliminate customer concerns
-Closing strategies 
-Expected surprises
+1. Written sales call objective
+2. Needs analysis questions
+3. Something to show
+4. Anticipated customer concerns and objections
+5. Points of difference compared to competitors
+6. Meaningful benefits to customers
+7. Dollarization approach; investment return analysis - the cost of going without your solution per annum/month/day - the true cost (versus price) of the product. 
+8. Strategies to handle objections and eliminate customer concerns
+9. Closing strategies  
+10. Expected surprises
 
-You’re out with a client or traveling - you’re never in a meeting and never sick.
-Sell in the mornings and after 3 on Fridays. 
-Park in the back and be the best-dressed person you will meet today. 
-Use a compelling voice-mail as a tool - leave messages in the early mornings or the late evenings, and use it to communicate a dollarized benefit to the decision maker. 
-Use your business card.
+* You’re out with a client or traveling - you’re never in a meeting and never sick.
+* Sell in the mornings and after 3 on Fridays. 
+* Park in the back and be the best-dressed person you will meet today. 
+* Use a compelling voice-mail as a tool - leave messages in the early mornings or the late evenings, and use it to communicate a dollarized benefit to the decision maker. 
+* Use your business card.
 
 **During sales call:**
 Schedule an appointment with the decision maker. 

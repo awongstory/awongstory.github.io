@@ -30,7 +30,7 @@ Few notes:
 
 Hope you're still with me!
 
-First things first, import your libraries. You'll need pandas, numpy, and an independent t-test from the scipy.stats library.
+First things first, import your libraries. You'll need `pandas`, `numpy`, and an independent t-test from the `scipy.stats` library.
 
 {% highlight python %}
 import pandas as pd
@@ -38,7 +38,7 @@ import numpy as np
 from scipy.stats import ttest_ind
 {% endhighlight %}
 
-We're using the chained value to 2009 dollars, 2000 onward. Get your recession start, in string format:
+We're using the chained value to 2009 dollars, 2000 onward. Get your `recession_start`, in string format:
 
 {% highlight python %}
 def get_recession_start():
@@ -54,7 +54,7 @@ def get_recession_start():
     return quarters[0]
 {% endhighlight %}
 
-And get the recession end:
+And get the `recession_end`:
 
 {% highlight python %}
 def get_recession_end():
@@ -67,7 +67,7 @@ def get_recession_end():
     return recession_end[0]
 {% endhighlight %}
 
-From recession start to recession end, you need to find the bottom:
+From `recession_start` to `recession_end`, you need to find the bottom:
 
 {% highlight python %}
 def get_recession_bottom():
@@ -78,7 +78,7 @@ def get_recession_bottom():
     return recession_min.values[0][0]
 {% endhighlight %}
 
-Get a list of university towns:
+Get a list of `university_towns`:
 
 {% highlight python %}
 def get_list_of_university_towns():
@@ -132,18 +132,19 @@ university_towns = get_list_of_university_towns()
 housingdata_df = convert_housing_data_to_quarters().dropna()
 {% endhighlight %}
 
-Make a copy of your housingdata_df, then create a ratio of housing prices:
+Make a copy of your `housingdata_df`, then create a ratio of housing prices:
 
 {% highlight python %}
 hdf = housingdata_df.copy()
 ratio = pd.DataFrame({'ratio': hdf[recession_start].div(hdf[recession_bottom])})
 {% endhighlight %}
 
-This was where I struggled. I could not join ratio as a column on hdf; it returned a 
+This was where I struggled. I could not join `ratio` as a column on hdf; it returned a 
 
 >> DateParseError: Unknown datetime string format, unable to parse ratio.
 
-Remember when we converted the housingdata_df into quarters using PeriodIndex? Ratio was not recognized as a datetime. The solution I chose was to change hdf dataframe's columns into strings, then concatenate ratio to the multiple strings... and then convert it back to a dataframe. 
+Remember when we converted the `housingdata_df` into quarters using `PeriodIndex`? 
+Ratio was not recognized as a `datetime`. The solution I chose was to change `hdf` dataframe's columns into strings, then concatenate ratio to the multiple strings... and then convert it back to a dataframe. 
 
 {% highlight python %}
 hdf.columns = hdf.columns.to_series().astype(str)
@@ -153,7 +154,7 @@ hdf = pd.DataFrame(hdf)
 hdf.reset_index(['State','RegionName'], inplace = True)
 {% endhighlight %}
 
-Then splice the dataframe into university town and non-university towns, calculate ratio for each, and dropna:
+Then splice the dataframe into university_town and non-university towns, calculate ratio for each, and `dropna`:
 
 {% highlight python %}
 unitown_priceratio = hdf.loc[list(university_towns.index)]['ratio'].dropna()

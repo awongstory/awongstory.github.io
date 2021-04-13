@@ -9,13 +9,13 @@ I recently finished Jeffrey Fox’s book on How to be a Rainmaker. The book is 1
 **Summary of the book:**
 Prepare, listen, dollarize, get a commitment to action or a close. 
 
-**4 Steps that are part of every sale: **
+**4 Steps that are part of every sale:**
 1. Getting a lead, referral, introduction to a decision maker.
 2. Getting an appointment to meet the decision-maker.
 3. Meeting the decision maker face-to-face.
 4. Getting a commitment to close or to an action that directly leads to a close.
 
-**Rainmaker’s Credo: **
+**Rainmaker’s Credo:**
 1. Cherish customers at all times - treat them like your best friend, listen to them and decipher their needs, make or give them what they need, and teach them to want what they need. Everyone is a potential customer. 
 2. Price your product to its dollarized value - show your customers what they will get and how much it costs per day/month/year to go without your solution. 
 3. (Over)-deliver - Make the product the way your customer wants it, deliver your product when they want it, and give them a little extra.
